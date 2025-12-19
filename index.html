@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Tempahan Makanan</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
+        .container { max-width: 600px; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); margin: auto; }
+        h2 { text-align: center; color: #d35400; }
+        .section { margin-bottom: 20px; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        select, input, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { width: 100%; padding: 12px; background-color: #27ae60; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 20px; }
+        button:hover { background-color: #219150; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Order Makanan & Minuman</h2>
+    <form id="orderForm">
+        <div class="section">
+            <label>Nama Pelanggan:</label>
+            <input type="text" id="nama" placeholder="Masukkan nama anda" required>
+        </div>
+
+        <div class="section">
+            <label>Pilih Makanan:</label>
+            <select id="makanan">
+                <option value="">-- Pilih Makanan --</option>
+                <option value="Nasi Goreng Kampung">Nasi Goreng Kampung</option>
+                <option value="Nasi Goreng Pattaya">Nasi Goreng Pattaya</option>
+                <option value="Nasi Goreng USD">Nasi Goreng USD</option>
+                <option value="Mi Sup">Mi Sup</option>
+                <option value="Bakso">Bakso</option>
+                <option value="Tomyam">Tomyam</option>
+                <option value="Nasi Kosong">Nasi Kosong</option>
+                <option value="Ayam Berempah">Ayam Berempah</option>
+                <option value="Ayam Penyet">Ayam Penyet</option>
+            </select>
+        </div>
+
+        <div class="section">
+            <label>Pilih Minuman:</label>
+            <select id="minuman">
+                <option value="">-- Pilih Minuman --</option>
+                <option value="Air Sirap">Air Sirap</option>
+                <option value="Air Limau Kasturi">Air Limau Kasturi</option>
+                <option value="Air Teh O">Air Teh O</option>
+                <option value="Air Milo">Air Milo</option>
+            </select>
+            
+            <label>Suhu Minuman:</label>
+            <select id="suhu">
+                <option value="Sejuk">Sejuk (Ais)</option>
+                <option value="Panas">Panas</option>
+            </select>
+        </div>
+
+        <div class="section">
+            <label>Nota Tambahan (cth: Tak nak pedas):</label>
+            <textarea id="nota" rows="3"></textarea>
+        </div>
+
+        <button type="button" onclick="hantarWhatsApp()">Hantar Tempahan (WhatsApp)</button>
+    </form>
+</div>
+
+<script>
+    function hantarWhatsApp() {
+        const nama = document.getElementById('nama').value;
+        const makanan = document.getElementById('makanan').value;
+        const minuman = document.getElementById('minuman').value;
+        const suhu = document.getElementById('suhu').value;
+        const nota = document.getElementById('nota').value;
+
+        if (nama === "" || makanan === "") {
+            alert("Sila isi nama dan pilih makanan!");
+            return;
+        }
+
+        // Gantikan nombor di bawah dengan nombor telefon kedai anda (format: 60123456789)
+        const noTelefon = "60123456789"; 
+        
+        const mesej = `*TEMPAHAN BARU*%0A` +
+                      `--------------------%0A` +
+                      `*Nama:* ${nama}%0A` +
+                      `*Makanan:* ${makanan}%0A` +
+                      `*Minuman:* ${minuman} (${suhu})%0A` +
+                      `*Nota:* ${nota}%0A` +
+                      `--------------------`;
+
+        window.open(`https://wa.me/${noTelefon}?text=${mesej}`, '_blank');
+    }
+</script>
+
+</body>
+</html>
